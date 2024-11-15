@@ -2,11 +2,13 @@
     "kids": [
         {
             "id": "1",
-            "name": "Billy"
+            "name": "Billy",
+            "giftScore": 2
         },
         {
             "id": "2",
-            "name": "Millie"
+            "name": "Millie",
+            "giftScore": 3
         }
     ],
     "toys": [
