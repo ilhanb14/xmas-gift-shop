@@ -33,3 +33,28 @@ function fetchData() {
 fetchData();
 
 document.getElementById('refresh').addEventListener('click', fetchData);
+
+document.getElementById('addChildButton').addEventListener('click', () => {
+    let nameInput = document.getElementById('name');
+    let giftScoreInput = document.getElementById('GiftScore');
+
+    let newKid = {
+        name: nameInput.value,
+        giftScore: parseInt(giftScoreInput.value)
+    };
+
+    fetch(url + 'kids', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newKid)
+    })
+    .then(res => res.json())
+    .then(() => {
+        fetchData();
+        nameInput.value = '';
+        giftScoreInput.value = '';
+    })
+    .catch(e => console.error('Error adding kid: ' + e));
+})
