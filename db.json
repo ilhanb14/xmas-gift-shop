@@ -1,0 +1,24 @@
+{
+    "kids": [
+        {
+            "id": "1",
+            "name": "Billy"
+        },
+        {
+            "id": "2",
+            "name": "Millie"
+        }
+    ],
+    "toys": [
+        {
+            "id": "1",
+            "name": "Star Wars Lego Set",
+            "childId": "1"
+        },
+        {
+            "id": "2",
+            "name": "Coloring Book",
+            "childId": "2"
+        }
+    ]
+}
