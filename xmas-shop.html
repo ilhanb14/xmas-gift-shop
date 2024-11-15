@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XMAS</title>
+    <link rel="stylesheet" href="xmas-shop.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Santa Management System </h1>
+        
+        <!-- Add childen and number of gifts form -->
+        <div class="input-group">
+            <input type="text" id="name" placeholder="name" required>
+            <input type="number" id="GiftScore" placeholder="GiftScore" required>
+            <button id="addChildButton">Add Child</button>
+        </div>
+        
+        <div class="button-group">
+            <button id="clear">Refresh data</button>
+            <button id="clearStorage">Clear data</button>
+        </div>
+        
+        <div id="output"></div>
+        
+        <!-- Saved data -->
+        <div class="saved-data">
+            <h2>List of saved kids with their gifts</h2>
+            <div id="savedOutput"></div>
+        </div>
+    </div>
     <script src="xmas-shop.js"></script>
 </body>
 </html>
