@@ -27,7 +27,7 @@ function fetchData() {
             `;
         }
     })
-    .catch(e => console.error("Error fetching data: " + e))
+    .catch(e => console.error("Error fetching data: " + e));
 }
 
 fetchData();
@@ -57,4 +57,4 @@ document.getElementById('addChildButton').addEventListener('click', () => {
         giftScoreInput.value = '';
     })
     .catch(e => console.error('Error adding kid: ' + e));
-})
+});
