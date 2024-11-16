@@ -85,6 +85,7 @@ function editKid(id) {
     item.querySelector('.button-group').style.display = 'none';
     item.querySelector('.item-content').style.display = 'none';
     item.querySelector('.edit-form').style.display = 'block';
+    item.querySelector('.toy-list').style.display = 'none';
 }
 
 function cancelEdit(id) {
@@ -93,6 +94,7 @@ function cancelEdit(id) {
     item.querySelector('.button-group').style.display = 'block';
     item.querySelector('.item-content').style.display = 'block';
     item.querySelector('.edit-form').style.display = 'none';
+    item.querySelector('.toy-list').style.display = 'block';
 }
 
 function saveEdit(id) {
