@@ -13,6 +13,12 @@ function fetchData() {
             output.innerHTML += `
                 <div class="data-item" id="kid-${kid.id}">
                     <span class="item-content">${kid.name} (${kid.giftScore})</span>
+                    <ul class="toy-list"></ul>
+                    <div class="add-toy-form" style="display: none;">
+                        <input type="text" class="add-toy-name">
+                        <button class="smallbutton" onclick="saveNewToy('${kid.id}')">S</button>
+                        <button class="smallbutton" onclick="cancelNewToy('${kid.id}')">X</button>
+                    </div>
                     <div class="edit-form" style="display: none;">
                         <input type="text" class="edit-name" value="${kid.name}">
                         <input type="number" class="edit-giftscore" value="${kid.giftScore}">
@@ -20,6 +26,7 @@ function fetchData() {
                         <button class="smallbutton" onclick="cancelEdit('${kid.id}')">X</button>
                     </div>
                     <div class="button-group">
+                        <button onclick="addToy('${kid.id}')">+</button>
                         <button onclick="editKid('${kid.id}')">Edit</button>
                         <button onclick="saveToLocal('${kid.id}', '${kid.name}', ${kid.giftScore})">Save</button>
                         <button onclick="deleteKid('${kid.id}')">Delete</button>
