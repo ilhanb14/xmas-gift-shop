@@ -110,8 +110,8 @@ function saveEdit(id) {
         giftScore: newGiftScore
     };
 
-     // Send PUT request to update
-     fetch(url + 'kids/' + id, {
+    // Send PUT request to update
+    fetch(url + 'kids/' + id, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -161,4 +161,32 @@ function cancelNewToy(id) {
     item.querySelector('.edit-form').style.display = 'none';
     item.querySelector('.toy-list').style.display = 'block';
     item.querySelector('.add-toy-form').style.display = 'none';
+}
+
+function saveNewToy(id) {
+    // Get name for new toy from input
+    let form = document.getElementById('kid-' + id).querySelector('.add-toy-form');
+    let newToyName = form.querySelector('.add-toy-name').value;
+
+    // Create new toy object
+    let newToy = {
+        name: newToyName,
+        childId: id
+    };
+
+    // TODO: Check giftscore, do not add new toy if giftscore reached/exceeded, show alert
+    // Add new toy to database
+    fetch(url + 'toys', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newToy)
+    })
+    .then(res => res.json())
+    .then(() => {
+        cancelNewToy(id); // Called to hide the form for adding a new toy and show the content again
+        fetchToyData(id);   // Update the toy list that was just added to
+    })
+    .catch(e => console.error('Error adding toy: ' + e));
 }
