@@ -58,3 +58,11 @@ document.getElementById('addChildButton').addEventListener('click', () => {
     })
     .catch(e => console.error('Error adding kid: ' + e));
 });
+
+function deleteKid(id) {
+    fetch(url + 'kids/' + id, {
+        method: 'DELETE'
+    })
+    .then(() => fetchData())
+    .catch(e => console.error('Error deleting kid: ' + e));
+}
