@@ -3,6 +3,7 @@ const output = document.getElementById('output');
 const savedOutput = document.getElementById('savedOutput');
 
 
+// Refresh data from database
 function fetchData() {
     output.innerHTML = '';
     fetch(url + 'kids')
@@ -35,14 +36,17 @@ fetchData();
 document.getElementById('refresh').addEventListener('click', fetchData);
 
 document.getElementById('addChildButton').addEventListener('click', () => {
+    // Get data from input form
     let nameInput = document.getElementById('name');
     let giftScoreInput = document.getElementById('GiftScore');
 
+    // New kid object using input data
     let newKid = {
         name: nameInput.value,
         giftScore: parseInt(giftScoreInput.value)
     };
 
+    // Add new data to database
     fetch(url + 'kids', {
         method: 'POST',
         headers: {
@@ -52,6 +56,7 @@ document.getElementById('addChildButton').addEventListener('click', () => {
     })
     .then(res => res.json())
     .then(() => {
+        // Refresh list of data and clear input form
         fetchData();
         nameInput.value = '';
         giftScoreInput.value = '';
@@ -68,6 +73,7 @@ function deleteKid(id) {
 }
 
 function editKid(id) {
+    // Show edit form and hide item content and buttons
     let item = document.getElementById('kid-' + id);
     item.querySelector('.button-group').style.display = 'none';
     item.querySelector('.item-content').style.display = 'none';
