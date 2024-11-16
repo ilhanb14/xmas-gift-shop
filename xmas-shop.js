@@ -144,6 +144,7 @@ function fetchToyData(childId) {
 }
 
 function addToy(id) {
+    // Show form for adding toy, hide everything else except main content
     let item = document.getElementById('kid-' + id);
     item.querySelector('.button-group').style.display = 'none';
     item.querySelector('.item-content').style.display = 'block';
@@ -151,3 +152,4 @@ function addToy(id) {
     item.querySelector('.toy-list').style.display = 'none';
     item.querySelector('.add-toy-form').style.display = 'block';
 }
+
