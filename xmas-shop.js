@@ -153,3 +153,12 @@ function addToy(id) {
     item.querySelector('.add-toy-form').style.display = 'block';
 }
 
+function cancelNewToy(id) {
+    // Hide form for adding toy, show content and buttons
+    let item = document.getElementById('kid-' + id);
+    item.querySelector('.button-group').style.display = 'block';
+    item.querySelector('.item-content').style.display = 'block';
+    item.querySelector('.edit-form').style.display = 'none';
+    item.querySelector('.toy-list').style.display = 'block';
+    item.querySelector('.add-toy-form').style.display = 'none';
+}
