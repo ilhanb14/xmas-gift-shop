@@ -87,3 +87,31 @@ function cancelEdit(id) {
     item.querySelector('.item-content').style.display = 'block';
     item.querySelector('.edit-form').style.display = 'none';
 }
+
+function saveEdit(id) {
+    // Get new data from edit form
+    let editForm = document.getElementById('kid-' + id).querySelector('.edit-form');
+    let newName = editForm.querySelector('.edit-name').value;
+    let newGiftScore = parseInt(editForm.querySelector('.edit-giftscore').value);
+
+    // New object with updated data
+    let updatedKid = {
+        name: newName,
+        giftScore: newGiftScore
+    };
+
+     // Send PUT request to update
+     fetch(url + 'kids/' + id, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedKid)
+    })
+    .then(res => res.json())
+    .then(() => {
+        // Refresh list of data, this also hides the edit form again
+        fetchData();
+    })
+    .catch(e => console.error('Error updating kid:', e));
+}
