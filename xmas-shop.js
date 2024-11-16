@@ -73,3 +73,11 @@ function editKid(id) {
     item.querySelector('.item-content').style.display = 'none';
     item.querySelector('.edit-form').style.display = 'block';
 }
+
+function cancelEdit(id) {
+    // Hide edit form and show item content and buttons
+    let item = document.getElementById('kid-' + id);
+    item.querySelector('.button-group').style.display = 'block';
+    item.querySelector('.item-content').style.display = 'block';
+    item.querySelector('.edit-form').style.display = 'none';
+}
