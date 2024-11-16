@@ -66,3 +66,10 @@ function deleteKid(id) {
     .then(() => fetchData())
     .catch(e => console.error('Error deleting kid: ' + e));
 }
+
+function editKid(id) {
+    let item = document.getElementById('kid-' + id);
+    item.querySelector('.button-group').style.display = 'none';
+    item.querySelector('.item-content').style.display = 'none';
+    item.querySelector('.edit-form').style.display = 'block';
+}
