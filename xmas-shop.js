@@ -174,19 +174,44 @@ function saveNewToy(id) {
         childId: id
     };
 
-    // TODO: Check giftscore, do not add new toy if giftscore reached/exceeded, show alert
-    // Add new toy to database
-    fetch(url + 'toys', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newToy)
-    })
+    // Check if this kid is allowed to have more toys, if so add it
+    // Fetch all toys to count how many toys this kid already has
+    fetch(url + 'toys')
     .then(res => res.json())
-    .then(() => {
-        cancelNewToy(id); // Called to hide the form for adding a new toy and show the content again
-        fetchToyData(id);   // Update the toy list that was just added to
+    .then(toys => {
+        let count = 0;
+        for (toy of toys) { // Read all toys, for each toy with the correct childId count 1
+            if (toy.childId == id)
+                count += 1;
+        }
+        return count;
     })
-    .catch(e => console.error('Error adding toy: ' + e));
+    .then(count => {
+        return fetch(url + 'kids/' + id) // Fetch the data for this kid and read their giftScore
+                .then(res => res.json())
+                .then(kid => count < kid.giftScore ? true : false)  // If this kid has reached/exceeded their allowed amount of toys this will be false
+                .catch(e => console.error('Error reading kid giftScore: ' + e));
+    })
+    .then(canAddToy => {
+        if(canAddToy) { // If this kid is allowed to have a toy added
+            // Add new toy to database
+            fetch(url + 'toys', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newToy)
+            })
+            .then(res => res.json())
+            .then(() => {
+                cancelNewToy(id);   // Called to hide the form for adding a new toy and show the content again
+                fetchToyData(id);   // Update the toy list that was just added to
+            })
+            .catch(e => console.error('Error adding toy: ' + e));
+        } else {    // Kid is not allowed to have a toy added
+            alert("Kid with id " + id + " has already reached/exceeded their allowed number of gifts, a new toy cannot be added");
+            cancelNewToy(id);
+        }
+    });
 }
+
