@@ -33,6 +33,7 @@ function fetchData() {
                     </div>
                 </div>
             `;
+            fetchToyData(kid.id); // Get all toys for this kid and show them in the list
         }
     })
     .catch(e => console.error("Error fetching data: " + e));
@@ -123,4 +124,21 @@ function saveEdit(id) {
         fetchData();
     })
     .catch(e => console.error('Error updating kid:', e));
+}
+
+function fetchToyData(childId) {
+    // Get all toys with the given childId and display it in the correct toy list
+    fetch(url + 'toys')
+    .then(res => res.json())
+    .then(data => {
+        // Get the correct toy list and clear it before adding toys
+        let list = document.getElementById('kid-' + childId).querySelector('.toy-list');
+        list.innerHTML = '';
+        for (toy of data) {
+            // For each toy check it has the correct childId, if yes add to the list
+            if (toy.childId == childId) {
+                list.innerHTML += `<li id='toy-${toy.id}'>${toy.name}</li>`;
+            }
+        }
+    })
 }
