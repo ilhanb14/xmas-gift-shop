@@ -232,7 +232,7 @@ function loadSavedKids() {
                 <div class="data-item" id='saved-${kid.id}'>
                     <span class="item-content">${kid.name} (${kid.giftScore})</span>
                     <ul class="toy-list"></ul>
-                    <button onclick="removeFromSaved(${kid.id})"> Delete </button>
+                    <button onclick="removeFromSaved('${kid.id}')"> Delete </button>
                 </div>
             `;
             let toyList = document.getElementById('saved-' + kid.id).querySelector('.toy-list');
@@ -277,4 +277,13 @@ function saveToLocal(id, name, giftScore) {
     }
 }
 
-// TODO: delete from local
+function removeFromSaved(id) {
+    try {
+        let savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');
+        savedKids = savedKids.filter(kid => kid.id !== id);
+        localStorage.setItem('savedKids', JSON.stringify(savedKids));
+        loadSavedKids();
+    } catch(e) {
+        console.error("Error removing saved kid: " + e);
+    }
+}
