@@ -13,7 +13,7 @@ function fetchData() {
         for (kid of data) {
             output.innerHTML += `
                 <div class="data-item" id="kid-${kid.id}">
-                    <span class="item-content">${kid.name} (${kid.giftScore})</span>
+                    <span class="item-content">${kid.name} (${kid.giftScore}) ${kid.location|| 'unknow'} </span>
                     <ul class="toy-list"></ul>
                     <div class="add-toy-form" style="display: none;">
                         <input type="text" class="add-toy-name">
@@ -23,13 +23,14 @@ function fetchData() {
                     <div class="edit-form" style="display: none;">
                         <input type="text" class="edit-name" value="${kid.name}">
                         <input type="number" class="edit-giftscore" value="${kid.giftScore}">
+                        <input type="text" class="edit-location" value="${kid.location}">
                         <button class="smallbutton" onclick="saveEdit('${kid.id}')">S</button>
                         <button class="smallbutton" onclick="cancelEdit('${kid.id}')">X</button>
                     </div>
                     <div class="button-group">
                         <button onclick="addToy('${kid.id}')">+</button>
                         <button onclick="editKid('${kid.id}')">Edit</button>
-                        <button onclick="saveToLocal('${kid.id}', '${kid.name}', ${kid.giftScore})">Save</button>
+                        <button onclick="saveToLocal('${kid.id}', '${kid.name}', ${kid.giftScore}, '${kid.location}')">Save</button>
                         <button onclick="deleteKid('${kid.id}')">Delete</button>
                     </div>
                 </div>
@@ -48,11 +49,14 @@ document.getElementById('addChildButton').addEventListener('click', () => {
     // Get data from input form
     let nameInput = document.getElementById('name');
     let giftScoreInput = document.getElementById('GiftScore');
+    let locationInput = document.getElementById('location');
+
 
     // New kid object using input data
     let newKid = {
         name: nameInput.value,
-        giftScore: parseInt(giftScoreInput.value)
+        giftScore: parseInt(giftScoreInput.value),
+        location: locationInput.value
     };
 
     // Add new data to database
@@ -104,11 +108,13 @@ function saveEdit(id) {
     let editForm = document.getElementById('kid-' + id).querySelector('.edit-form');
     let newName = editForm.querySelector('.edit-name').value;
     let newGiftScore = parseInt(editForm.querySelector('.edit-giftscore').value);
+    let newLocation = editForm.querySelector('.edit-location').value;
 
     // New object with updated data
     let updatedKid = {
         name: newName,
-        giftScore: newGiftScore
+        giftScore: newGiftScore,
+        location: newLocation
     };
 
     // Send PUT request to update
@@ -247,7 +253,7 @@ function loadSavedKids() {
     }
 }
 
-function saveToLocal(id, name, giftScore) {
+function saveToLocal(id, name, giftScore, location) {
     try {
         // Make an array of toys by reading their names from this kid's list in the html
         const toyList = document.getElementById('kid-' + id).querySelector('.toy-list');
@@ -260,7 +266,8 @@ function saveToLocal(id, name, giftScore) {
             id: id,
             name: name,
             giftScore: giftScore,
-            toys: toys
+            toys: toys,
+            location: location
         };
 
         let savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');   // Get locally saved kid items or an empty array if none saved
