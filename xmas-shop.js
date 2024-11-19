@@ -215,3 +215,37 @@ function saveNewToy(id) {
     });
 }
 
+// TODO: load from local
+
+
+function saveToLocal(id, name, giftScore) {
+    try {
+        // Make an array of toys by reading their names from this kid's list in the html
+        const toyList = document.getElementById('kid-' + id).querySelector('.toy-list');
+        let toys = [];
+        for (listItem of toyList.children) {
+            toys.push(listItem.innerHTML);
+        }
+
+        const newLocalKid = {
+            id: id,
+            name: name,
+            giftScore: giftScore,
+            toys: toys
+        };
+
+        let savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');   // Get locally saved kid items or an empty array if none saved
+        console.log(localStorage.getItem('savedKids'));
+        if (!savedKids.some(kid => kid.id === newLocalKid.id)) {   // If not already saved add this kid to local storage
+            savedKids.push(newLocalKid);
+            localStorage.setItem('savedKids', JSON.stringify(savedKids));
+            // TODO: call loadSavedKids
+        } else {
+            alert('This kid item is already saved locally');
+        }
+    } catch (e) {
+        console.error('Error saving to local: ' + e);
+    }
+}
+
+// TODO: delete from local
