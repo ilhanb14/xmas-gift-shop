@@ -144,7 +144,9 @@ function fetchToyData(childId) {
         for (toy of data) {
             // For each toy check it has the correct childId, if yes add to the list
             if (toy.childId == childId) {
-                list.innerHTML += `<li id='toy-${toy.id}'>${toy.name}</li>`;
+                list.innerHTML += `
+                <li id='toy-${toy.id}'>${toy.name}</li>
+                <button class='delete-toy-button small-button' onclick="deleteToy('${toy.id}', '${childId}')">X</button>`;
             }
         }
     })
@@ -223,6 +225,13 @@ function saveNewToy(id) {
     });
 }
 
+function deleteToy(toyId, childId) {
+    fetch(url + 'toys/' + toyId, {
+        method: 'DELETE'
+    })
+    .then(() => fetchToyData(childId))
+    .catch(e => console.error('Error deleting toy: ' + e));
+}
 
 function loadSavedKids() {
     try {
