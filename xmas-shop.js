@@ -1,7 +1,8 @@
 const url = 'http://localhost:3000/';
 const output = document.getElementById('output');
 const savedOutput = document.getElementById('savedOutput');
-
+fetchData();
+loadSavedKids();
 
 // Refresh data from database
 function fetchData() {
@@ -39,7 +40,7 @@ function fetchData() {
     .catch(e => console.error("Error fetching data: " + e));
 }
 
-fetchData();
+
 
 document.getElementById('refresh').addEventListener('click', fetchData);
 
@@ -244,8 +245,6 @@ function loadSavedKids() {
         console.error("Error reading from local storage: " + e);
     }
 }
-
-loadSavedKids();
 
 function saveToLocal(id, name, giftScore) {
     try {
