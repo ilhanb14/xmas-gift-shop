@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XMAS</title>
     <link rel="stylesheet" href="xmas-shop.css">
+    
+    
+   
 </head>
 <body>
     <div class="container">
         <h1>Santa Management System </h1>
+        <img src="img/santa.png" alt="">
         
         <!-- Add childen and number of gifts form -->
         <div class="input-group">
+            <div>
             <input type="text" id="name" placeholder="name" required>
             <input type="number" id="GiftScore" placeholder="GiftScore" required>
             <button id="addChildButton">Add Child</button>
-        </div>
-        
-        <!--Button to refresh or clear the data-->
-
-        <div class="button-group">
+            </div>
+            <div>
             <button id="refresh">Refresh data</button>
             <button id="clearStorage">Clear data</button>
+            </div>
         </div>
+
         
-        <div id="output"></div>
+        
+        <div class="flex">
+            <div id="output"></div>
         
         <!-- Saved data -->
         <div class="saved-data">
@@ -32,7 +38,9 @@
             <div id="savedOutput"></div>
         </div>
     </div>
+    </div>
 
     <script src="xmas-shop.js"></script>
+    
 </body>
 </html>
