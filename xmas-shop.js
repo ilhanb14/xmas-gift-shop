@@ -1,7 +1,8 @@
 const url = 'http://localhost:3000/';
 const output = document.getElementById('output');
 const savedOutput = document.getElementById('savedOutput');
-
+fetchData();
+loadSavedKids();
 
 // Refresh data from database
 function fetchData() {
@@ -39,7 +40,7 @@ function fetchData() {
     .catch(e => console.error("Error fetching data: " + e));
 }
 
-fetchData();
+
 
 document.getElementById('refresh').addEventListener('click', fetchData);
 
@@ -215,3 +216,73 @@ function saveNewToy(id) {
     });
 }
 
+
+function loadSavedKids() {
+    try {
+        const savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');
+        savedOutput.innerHTML = '';
+
+        // Display message if no data saved yet
+        if (savedKids.length == 0) {
+            savedOutput.innerHTML = "<div class='no-local-message'> No data saved yet! </div>";
+        }
+
+        // Display all saved kids
+        for (kid of savedKids) {
+            savedOutput.innerHTML += `
+                <div class="data-item" id='saved-${kid.id}'>
+                    <span class="item-content">${kid.name} (${kid.giftScore})</span>
+                    <ul class="toy-list"></ul>
+                    <button onclick="removeFromSaved('${kid.id}')"> Delete </button>
+                </div>
+            `;
+            let toyList = document.getElementById('saved-' + kid.id).querySelector('.toy-list');
+            for (toy of kid.toys) {     // Show this kid's toys in list
+                toyList.innerHTML += `<li> ${toy} </li>`;
+            }
+        }
+    } catch(e) {
+        console.error("Error reading from local storage: " + e);
+    }
+}
+
+function saveToLocal(id, name, giftScore) {
+    try {
+        // Make an array of toys by reading their names from this kid's list in the html
+        const toyList = document.getElementById('kid-' + id).querySelector('.toy-list');
+        let toys = [];
+        for (listItem of toyList.children) {
+            toys.push(listItem.innerHTML);
+        }
+
+        const newLocalKid = {
+            id: id,
+            name: name,
+            giftScore: giftScore,
+            toys: toys
+        };
+
+        let savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');   // Get locally saved kid items or an empty array if none saved
+        console.log(localStorage.getItem('savedKids'));
+        if (!savedKids.some(kid => kid.id === newLocalKid.id)) {   // If not already saved add this kid to local storage
+            savedKids.push(newLocalKid);
+            localStorage.setItem('savedKids', JSON.stringify(savedKids));
+            loadSavedKids();
+        } else {
+            alert('This kid item is already saved locally');
+        }
+    } catch (e) {
+        console.error('Error saving to local: ' + e);
+    }
+}
+
+function removeFromSaved(id) {
+    try {
+        let savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');
+        savedKids = savedKids.filter(kid => kid.id !== id);
+        localStorage.setItem('savedKids', JSON.stringify(savedKids));
+        loadSavedKids();
+    } catch(e) {
+        console.error("Error removing saved kid: " + e);
+    }
+}
