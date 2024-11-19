@@ -1,26 +1,107 @@
 {
-    "kids": [
-        {
-            "id": "1",
-            "name": "Billy",
-            "giftScore": 2
-        },
-        {
-            "id": "2",
-            "name": "Millie",
-            "giftScore": 3
-        }
-    ],
-    "toys": [
-        {
-            "id": "1",
-            "name": "Star Wars Lego Set",
-            "childId": "1"
-        },
-        {
-            "id": "2",
-            "name": "Coloring Book",
-            "childId": "2"
-        }
-    ]
+  "kids": [
+    {
+      "id": "e65e",
+      "name": "Joe",
+      "giftScore": 2,
+      "location": "Genk"
+    }
+  ],
+  "toys": [
+    {
+      "id": "1",
+      "name": "Star Wars Lego Set",
+      "childId": "1"
+    },
+    {
+      "id": "2",
+      "name": "Coloring Book",
+      "childId": "2"
+    },
+    {
+      "id": "9000",
+      "name": "",
+      "childId": "1b7a"
+    },
+    {
+      "id": "4587",
+      "name": "",
+      "childId": "82b0"
+    },
+    {
+      "id": "82fb",
+      "name": "Cars",
+      "childId": "82b0"
+    },
+    {
+      "id": "82f9",
+      "name": "sd",
+      "childId": "1"
+    },
+    {
+      "id": "9ed1",
+      "name": "Lego star wars",
+      "childId": "a39d"
+    },
+    {
+      "id": "64f8",
+      "name": "Puzzle",
+      "childId": "a39d"
+    },
+    {
+      "id": "0d0d",
+      "name": "Playmobil ",
+      "childId": "3595"
+    },
+    {
+      "id": "29ef",
+      "name": "Monopoly",
+      "childId": "851e"
+    },
+    {
+      "id": "3674",
+      "name": "Doll",
+      "childId": "851e"
+    },
+    {
+      "id": "343c",
+      "name": "Cars",
+      "childId": "851e"
+    },
+    {
+      "id": "2be5",
+      "name": "hkjhkjh",
+      "childId": "0696"
+    },
+    {
+      "id": "7912",
+      "name": "doll",
+      "childId": "6e65"
+    },
+    {
+      "id": "59d5",
+      "name": "cars",
+      "childId": "6e65"
+    },
+    {
+      "id": "bbc1",
+      "name": "dfrg",
+      "childId": "0696"
+    },
+    {
+      "id": "4a24",
+      "name": "dolls",
+      "childId": "7ca2"
+    },
+    {
+      "id": "dee3",
+      "name": "Puzzle",
+      "childId": "e65e"
+    },
+    {
+      "id": "518c",
+      "name": "Robot",
+      "childId": "e65e"
+    }
+  ]
 }

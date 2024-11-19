@@ -184,3 +184,10 @@ margin-right: auto;
 h2{
   color: gold;
 }
+
+.spotify{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  
+}
