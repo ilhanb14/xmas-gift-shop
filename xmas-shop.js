@@ -215,8 +215,37 @@ function saveNewToy(id) {
     });
 }
 
-// TODO: load from local
 
+function loadSavedKids() {
+    try {
+        const savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');
+        savedOutput.innerHTML = '';
+
+        // Display message if no data saved yet
+        if (savedKids.length == 0) {
+            savedOutput.innerHTML = "<div class='no-local-message'> No data saved yet! </div>";
+        }
+
+        // Display all saved kids
+        for (kid of savedKids) {
+            savedOutput.innerHTML += `
+                <div class="data-item" id='saved-${kid.id}'>
+                    <span class="item-content">${kid.name} (${kid.giftScore})</span>
+                    <ul class="toy-list"></ul>
+                    <button onclick="removeFromSaved(${kid.id})"> Delete </button>
+                </div>
+            `;
+            let toyList = document.getElementById('saved-' + kid.id).querySelector('.toy-list');
+            for (toy of kid.toys) {     // Show this kid's toys in list
+                toyList.innerHTML += `<li> ${toy} </li>`;
+            }
+        }
+    } catch(e) {
+        console.error("Error reading from local storage: " + e);
+    }
+}
+
+loadSavedKids();
 
 function saveToLocal(id, name, giftScore) {
     try {
@@ -239,7 +268,7 @@ function saveToLocal(id, name, giftScore) {
         if (!savedKids.some(kid => kid.id === newLocalKid.id)) {   // If not already saved add this kid to local storage
             savedKids.push(newLocalKid);
             localStorage.setItem('savedKids', JSON.stringify(savedKids));
-            // TODO: call loadSavedKids
+            loadSavedKids();
         } else {
             alert('This kid item is already saved locally');
         }
