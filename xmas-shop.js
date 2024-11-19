@@ -145,7 +145,7 @@ function fetchToyData(childId) {
             // For each toy check it has the correct childId, if yes add to the list
             if (toy.childId == childId) {
                 list.innerHTML += `
-                <li id='toy-${toy.id}'>${toy.name}</li>
+                <li id='toy-${toy.id}' class='toy'>${toy.name}</li>
                 <button class='delete-toy-button small-button' onclick="deleteToy('${toy.id}', '${childId}')">X</button>`;
             }
         }
@@ -266,8 +266,9 @@ function saveToLocal(id, name, giftScore, location) {
     try {
         // Make an array of toys by reading their names from this kid's list in the html
         const toyList = document.getElementById('kid-' + id).querySelector('.toy-list');
+        const toyListItems = toyList.getElementsByClassName('toy');
         let toys = [];
-        for (listItem of toyList.children) {
+        for (listItem of toyListItems) {
             toys.push(listItem.innerHTML);
         }
 
@@ -280,7 +281,6 @@ function saveToLocal(id, name, giftScore, location) {
         };
 
         let savedKids = JSON.parse(localStorage.getItem('savedKids') || '[]');   // Get locally saved kid items or an empty array if none saved
-        console.log(localStorage.getItem('savedKids'));
         if (!savedKids.some(kid => kid.id === newLocalKid.id)) {   // If not already saved add this kid to local storage
             savedKids.push(newLocalKid);
             localStorage.setItem('savedKids', JSON.stringify(savedKids));
