@@ -140,7 +140,7 @@ function fetchToyData(childId) {
             if (toy.childId == childId) {
                 list.innerHTML += `
                 <li id='toy-${toy.id}'>
-                ${toy.name} <button class='delete-toy-button small-button' onclick='deleteToy(${toy.id}, ${childId})'>X</button>
+                ${toy.name} <button class='delete-toy-button small-button' onclick="deleteToy('${toy.id}', '${childId}')">X</button>
                 </li>`;
             }
         }
