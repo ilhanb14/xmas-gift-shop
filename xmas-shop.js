@@ -162,6 +162,7 @@ function cancelNewToy(id) {
     item.querySelector('.edit-form').style.display = 'none';
     item.querySelector('.toy-list').style.display = 'block';
     item.querySelector('.add-toy-form').style.display = 'none';
+    item.querySelector('.add-toy-name').value = '';     // Clear the input
 }
 
 function saveNewToy(id) {
