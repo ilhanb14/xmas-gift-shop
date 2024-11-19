@@ -220,6 +220,13 @@ function saveNewToy(id) {
     });
 }
 
+function deleteToy(toyId, childId) {
+    fetch(url + 'toys/' + toyId, {
+        method: 'DELETE'
+    })
+    .then(() => fetchToyData(childId))
+    .catch(e => console.error('Error deleting toy: ' + e));
+}
 
 function loadSavedKids() {
     try {
